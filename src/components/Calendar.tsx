@@ -14,6 +14,10 @@ interface CalendarProps {
   handleDropOnCalendar: (activity: Activity, className: string, date: string) => void;
 }
 
+/**
+ * Componente de calendario simplificado. Genera un grid de fechas y muestra
+ * las actividades programadas. Cada día permite soltar elementos arrastrados.
+ */
 const Calendar: React.FC<CalendarProps> = ({
   classes,
   classDetails,
@@ -24,7 +28,7 @@ const Calendar: React.FC<CalendarProps> = ({
   setDraggedActivity,
   handleDropOnCalendar,
 }) => {
-  // Generamos 7 fechas de ejemplo.
+  // En este ejemplo generamos 7 fechas fijas.
   const dates = Array.from({ length: 7 }, (_, i) => `2025-09-2${i + 1}`);
 
   return (
@@ -33,7 +37,6 @@ const Calendar: React.FC<CalendarProps> = ({
         <div
           key={date}
           className="border p-2 min-h-[100px]"
-          // Permite soltar elementos.
           onDragOver={(e) => e.preventDefault()}
           onDrop={() => {
             if (draggedActivity) {
