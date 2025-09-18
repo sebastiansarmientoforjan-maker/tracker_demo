@@ -5,12 +5,6 @@ import { doc, updateDoc, collection, Firestore } from "firebase/firestore";
 import { useAuth } from "./AuthContext";
 import type { ScheduledActivity } from "../types";
 
-/**
- * Props for ActivityModal. In addition to the optional identifiers for the
- * activity to be edited, it accepts optional scheduledActivities and
- * setScheduledActivities props purely for type-compatibility with older
- * call sites. These are ignored by the component itself.
- */
 interface ActivityModalProps {
   activityId?: string;
   initialData?: any;
@@ -18,12 +12,6 @@ interface ActivityModalProps {
   setScheduledActivities?: React.Dispatch<React.SetStateAction<ScheduledActivity[]>>;
 }
 
-/**
- * Modal component for editing an activity. Fetches the Firestore instance and
- * user from context and allows updating the activity document. The UI is
- * intentionally hidden here; you can expose it when you are ready to show
- * the modal.
- */
 const ActivityModal: React.FC<ActivityModalProps> = ({ activityId, initialData }) => {
   const { db, user } = useAuth();
 
@@ -34,9 +22,7 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ activityId, initialData }
 
   const updateActivity = async () => {
     if (!user || !db || !activityId) {
-      console.error(
-        "Usuario no autenticado, base de datos no disponible o ID de actividad faltante."
-      );
+      console.error("Usuario no autenticado, base de datos no disponible o ID de actividad faltante.");
       return;
     }
 
@@ -58,7 +44,6 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ activityId, initialData }
     }
   };
 
-  // Hide the modal by default. Insert your own UI here when ready.
   return <div className="hidden" />;
 };
 
