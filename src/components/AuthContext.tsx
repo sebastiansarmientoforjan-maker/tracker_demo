@@ -26,14 +26,12 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
-// Proveedor de autenticación simplificado.
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [scheduledActivities, setScheduledActivities] = useState<ScheduledActivity[]>([]);
 
-  // Clases de ejemplo.
   const classes = ["class-1", "class-2"];
   const classDetails: Record<string, any> = {
     "class-1": { name: "Class 1" },
