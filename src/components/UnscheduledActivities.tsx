@@ -8,6 +8,10 @@ interface UnscheduledActivitiesProps {
   handleDragStart: (activity: Activity) => void;
 }
 
+/**
+ * Lista de actividades no programadas. Cada elemento es draggable y al iniciar
+ * el drag se envía al padre.
+ */
 const UnscheduledActivities: React.FC<UnscheduledActivitiesProps> = ({
   unscheduledActivities,
   handleDragStart,
@@ -15,7 +19,6 @@ const UnscheduledActivities: React.FC<UnscheduledActivitiesProps> = ({
   return (
     <div className="p-2 border rounded-md bg-white shadow">
       <h2 className="text-lg font-semibold mb-2">Actividades sin programar</h2>
-      {/* Eliminamos las viñetas y definimos estilo */}
       <ul className="list-none p-0 m-0">
         {unscheduledActivities.map((activity) => (
           <li
