@@ -9,8 +9,8 @@ interface UnscheduledActivitiesProps {
 }
 
 /**
- * Displays a list of activities that are not yet scheduled. When the user
- * clicks on an item, it triggers the drag start callback.
+ * Displays a list of activities that are not yet scheduled.  Each item is
+ * draggable; dragging an item will set it as the current dragged activity.
  */
 const UnscheduledActivities: React.FC<UnscheduledActivitiesProps> = ({
   unscheduledActivities,
@@ -23,8 +23,9 @@ const UnscheduledActivities: React.FC<UnscheduledActivitiesProps> = ({
         {unscheduledActivities.map((activity) => (
           <li
             key={activity.id}
+            draggable={true}
+            onDragStart={() => handleDragStart(activity)}
             className="mb-1 p-2 border rounded bg-gray-50 cursor-pointer"
-            onClick={() => handleDragStart(activity)}
           >
             {activity.title}
           </li>
