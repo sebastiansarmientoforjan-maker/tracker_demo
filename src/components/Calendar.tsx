@@ -14,10 +14,6 @@ interface CalendarProps {
   handleDropOnCalendar: (activity: Activity, className: string, date: string) => void;
 }
 
-/**
- * Simplified calendar component.  Generates a static list of dates and renders
- * scheduled activities.  Each day cell accepts drops from draggable activities.
- */
 const Calendar: React.FC<CalendarProps> = ({
   classes,
   classDetails,
@@ -28,8 +24,7 @@ const Calendar: React.FC<CalendarProps> = ({
   setDraggedActivity,
   handleDropOnCalendar,
 }) => {
-  // For demonstration, generate a simple week of dates.  In a real app you'd build this
-  // based on the current month or selected view.
+  // Generamos 7 fechas de ejemplo.
   const dates = Array.from({ length: 7 }, (_, i) => `2025-09-2${i + 1}`);
 
   return (
@@ -38,12 +33,15 @@ const Calendar: React.FC<CalendarProps> = ({
         <div
           key={date}
           className="border p-2 min-h-[100px]"
-          // Allow dropping by preventing the default drag-over behavior.
+          // Permite soltar elementos.
           onDragOver={(e) => e.preventDefault()}
-          // When an item is dropped, schedule it on this date and clear the drag state.
           onDrop={() => {
             if (draggedActivity) {
-              handleDropOnCalendar(draggedActivity, classes[0] ?? "default", date);
+              handleDropOnCalendar(
+                draggedActivity,
+                classes[0] ?? "default",
+                date
+              );
               setDraggedActivity(null);
             }
           }}
