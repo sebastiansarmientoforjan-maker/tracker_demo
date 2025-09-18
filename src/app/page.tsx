@@ -21,16 +21,16 @@ const Home: React.FC = () => {
     message,
   } = useAuth();
 
-  // Local state for unscheduled activities.
+  // Lista inicial de actividades no programadas.
   const [unscheduledActivities, setUnscheduledActivities] = useState<Activity[]>([
     { id: "a1", title: "Actividad 1", unit: "Unit 1", classType: "Standard" },
     { id: "a2", title: "Actividad 2", unit: "Unit 2", classType: "Advanced" },
   ]);
 
-  // Holds the activity currently being dragged.
+  // Estado para la actividad que se está arrastrando.
   const [draggedActivity, setDraggedActivity] = useState<Activity | null>(null);
 
-  // When an activity is dropped on a calendar day, update schedules and clear the drag state.
+  // Cuando sueltas una actividad sobre el calendario.
   const handleDropOnCalendar = (
     activity: Activity,
     className: string,
@@ -42,11 +42,12 @@ const Home: React.FC = () => {
       date,
     };
     setScheduledActivities((prev) => [...prev, newScheduled]);
+    // Elimina la actividad de la lista de no programadas.
     setUnscheduledActivities((prev) => prev.filter((a) => a.id !== activity.id));
     setDraggedActivity(null);
   };
 
-  // When a drag begins, store the activity as the currently dragged one.
+  // Cuando comienzas a arrastrar una actividad.
   const handleDragStart = (activity: Activity) => {
     setDraggedActivity(activity);
   };
@@ -62,15 +63,12 @@ const Home: React.FC = () => {
       )}
 
       <div className="flex flex-col md:flex-row w-full max-w-7xl gap-4">
-        {/* Left pane: list of activities not yet scheduled */}
         <div className="md:w-1/4">
           <UnscheduledActivities
             unscheduledActivities={unscheduledActivities}
             handleDragStart={handleDragStart}
           />
         </div>
-
-        {/* Right pane: calendar */}
         <div className="md:w-3/4">
           <Calendar
             classes={classes}
@@ -85,13 +83,12 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      {/* Other modals (still placeholders) */}
+      {/* Los modales aún son marcadores de posición */}
       <ActivityModal />
       <HolidayModal />
       <TeacherModal />
       <EditScheduleModal />
 
-      {/* Display any context message */}
       {message && (
         <div className="mt-4 px-4 py-2 bg-yellow-100 text-yellow-800 rounded-md shadow">
           {message}
