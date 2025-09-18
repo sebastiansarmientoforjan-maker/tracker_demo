@@ -1,11 +1,10 @@
-// src/app/layout.tsx
-import { ReactNode } from 'react';
-import '../globals.css';    // optional: global styles if you create this file
-import { AuthProvider } from '../components/AuthContext';
+import { ReactNode } from "react";
+import '../globals.css';
+import { AuthProvider } from "../components/AuthContext";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body>
         <AuthProvider>{children}</AuthProvider>
       </body>
