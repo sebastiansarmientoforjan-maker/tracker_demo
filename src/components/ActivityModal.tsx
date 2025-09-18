@@ -9,10 +9,15 @@ interface ActivityModalProps {
   activityId?: string;
   initialData?: any;
   scheduledActivities?: ScheduledActivity[];
-  setScheduledActivities?: React.Dispatch<React.SetStateAction<ScheduledActivity[]>>;
+  setScheduledActivities?: React.Dispatch<
+    React.SetStateAction<ScheduledActivity[]>
+  >;
 }
 
-const ActivityModal: React.FC<ActivityModalProps> = ({ activityId, initialData }) => {
+const ActivityModal: React.FC<ActivityModalProps> = ({
+  activityId,
+  initialData,
+}) => {
   const { db, user } = useAuth();
 
   const [activityName, setActivityName] = useState(initialData?.name || "");
@@ -22,7 +27,9 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ activityId, initialData }
 
   const updateActivity = async () => {
     if (!user || !db || !activityId) {
-      console.error("Usuario no autenticado, base de datos no disponible o ID de actividad faltante.");
+      console.error(
+        "Usuario no autenticado, base de datos no disponible o ID de actividad faltante."
+      );
       return;
     }
 
