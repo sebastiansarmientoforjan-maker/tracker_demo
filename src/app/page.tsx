@@ -21,16 +21,16 @@ const Home: React.FC = () => {
     message,
   } = useAuth();
 
-  // Lista inicial de actividades no programadas.
+  // Lista de actividades no programadas
   const [unscheduledActivities, setUnscheduledActivities] = useState<Activity[]>([
     { id: "a1", title: "Actividad 1", unit: "Unit 1", classType: "Standard" },
     { id: "a2", title: "Actividad 2", unit: "Unit 2", classType: "Advanced" },
   ]);
 
-  // Estado para la actividad que se está arrastrando.
+  // Estado de la actividad que se arrastra
   const [draggedActivity, setDraggedActivity] = useState<Activity | null>(null);
 
-  // Cuando sueltas una actividad sobre el calendario.
+  // Al soltar una actividad sobre el calendario
   const handleDropOnCalendar = (
     activity: Activity,
     className: string,
@@ -42,12 +42,11 @@ const Home: React.FC = () => {
       date,
     };
     setScheduledActivities((prev) => [...prev, newScheduled]);
-    // Elimina la actividad de la lista de no programadas.
     setUnscheduledActivities((prev) => prev.filter((a) => a.id !== activity.id));
     setDraggedActivity(null);
   };
 
-  // Cuando comienzas a arrastrar una actividad.
+  // Al comenzar a arrastrar una actividad
   const handleDragStart = (activity: Activity) => {
     setDraggedActivity(activity);
   };
@@ -83,7 +82,7 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      {/* Los modales aún son marcadores de posición */}
+      {/* Modales (placeholder) */}
       <ActivityModal />
       <HolidayModal />
       <TeacherModal />
